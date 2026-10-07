@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentPro – Insurance Agent Management System</title>
+  <meta name="description" content="AgentPro by Data Alcott Systems: A professional insurance agent management platform for recruiting, onboarding, tracking performance, and managing commissions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== LOGIN / REGISTER SCREEN ===== -->
+  <div id="auth-screen" class="auth-screen">
+    <div class="auth-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="auth-container">
+      <div class="auth-brand">
+        <div class="auth-logo">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <h1>Agent<span>Pro</span></h1>
+        <p class="auth-tagline">Insurance Agent Management System</p>
+        <p class="auth-company">by Data Alcott Systems</p>
+      </div>
+      <!-- LOGIN FORM -->
+      <form id="login-form" class="auth-form active" autocomplete="off">
+        <h2>Welcome Back</h2>
+        <p class="auth-subtitle">Sign in to your account</p>
+        <div class="form-group">
+          <label for="login-email"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="login-email" placeholder="admin@agentpro.com" required />
+        </div>
+        <div class="form-group">
+          <label for="login-password"><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn-primary btn-auth">
+          <i class="fas fa-arrow-right-to-bracket"></i> Sign In
+        </button>
+        <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Create one</a></p>
+        <p class="auth-hint">Demo: admin@agentpro.com / admin123</p>
+      </form>
+      <!-- REGISTER FORM -->
+      <form id="register-form" class="auth-form" autocomplete="off">
+        <h2>Create Account</h2>
+        <p class="auth-subtitle">Join AgentPro today</p>
+        <div class="form-group">
+          <label for="reg-name"><i class="fas fa-user"></i> Full Name</label>
+          <input type="text" id="reg-name" placeholder="Your Name" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-email"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="reg-email" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label for="reg-password"><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="reg-password" placeholder="Min 6 characters" required minlength="6" />
+        </div>
+        <div class="form-group">
+          <label for="reg-role"><i class="fas fa-briefcase"></i> Role</label>
+          <select id="reg-role">
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="Agent">Agent</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary btn-auth">
+          <i class="fas fa-user-plus"></i> Create Account
+        </button>
+        <p class="auth-switch">Already have an account? <a href="#" id="show-login">Sign in</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MAIN APPLICATION ===== -->
+  <div id="app" class="app hidden">
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <i class="fas fa-shield-halved"></i>
+          <span>Agent<strong>Pro</strong></span>
+        </div>
+        <button id="sidebar-close" class="sidebar-close" aria-label="Close sidebar">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-link active" data-page="dashboard">
+          <i class="fas fa-gauge-high"></i><span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-link" data-page="register-agent">
+          <i class="fas fa-user-plus"></i><span>Agent Registration</span>
+        </a>
+        <a href="#" class="nav-link" data-page="agents">
+          <i class="fas fa-users"></i><span>Agent Listing</span>
+        </a>
+        <a href="#" class="nav-link" data-page="commissions">
+          <i class="fas fa-coins"></i><span>Commissions</span>
+        </a>
+        <a href="#" class="nav-link" data-page="performance">
+          <i class="fas fa-chart-line"></i><span>Performance</span>
+        </a>
+        <a href="#" class="nav-link" data-page="training">
+          <i class="fas fa-graduation-cap"></i><span>Training</span>
+        </a>
+        <a href="#" class="nav-link" data-page="incentives">
+          <i class="fas fa-trophy"></i><span>Incentives & Rewards</span>
+        </a>
+        <a href="#" class="nav-link" data-page="reports">
+          <i class="fas fa-file-chart-column"></i><span>Reports</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <p>&copy; 2026 Data Alcott Systems</p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="hamburger" class="hamburger" aria-label="Toggle sidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2 id="page-title" class="page-title">Dashboard</h2>
+        </div>
+        <div class="topbar-right">
+          <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div class="topbar-user">
+            <div class="user-avatar" id="topbar-avatar">A</div>
+            <span id="topbar-username">Admin</span>
+          </div>
+          <button id="logout-btn" class="icon-btn" aria-label="Logout" title="Logout">
+            <i class="fas fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGE CONTAINER -->
+      <main id="page-container" class="page-container">
+
+        <!-- ==================== DASHBOARD ==================== -->
+        <section id="page-dashboard" class="page active">
+          <!-- KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card kpi-amber">
+              <div class="kpi-icon"><i class="fas fa-users"></i></div>
+              <div class="kpi-body">
+                <span class="kpi-label">Total Agents</span>
+                <span class="kpi-value" id="kpi-total-agents">0</span>
+              </div>
+            </div>
+            <div class="kpi-card kpi-green">
+              <div class="kpi-icon"><i class="fas fa-user-check"></i></div>
+              <div class="kpi-body">
+                <span class="kpi-label">Active Agents</span>
+                <span class="kpi-value" id="kpi-active-agents">0</span>
+              </div>
+            </div>
+            <div class="kpi-card kpi-blue">
+              <div class="kpi-icon"><i class="fas fa-file-contract"></i></div>
+              <div class="kpi-body">
+                <span class="kpi-label">Policies Sold</span>
+                <span class="kpi-value" id="kpi-policies-sold">0</span>
+              </div>
+            </div>
+            <div class="kpi-card kpi-purple">
+              <div class="kpi-icon"><i class="fas fa-indian-rupee-sign"></i></div>
+              <div class="kpi-body">
+                <span class="kpi-label">Total Commissions</span>
+                <span class="kpi-value" id="kpi-total-commissions">₹0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Performance Chart -->
+            <div class="card card-chart">
+              <div class="card-header">
+                <h3><i class="fas fa-chart-bar"></i> Monthly Performance</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="chart-performance" height="260"></canvas>
+              </div>
+            </div>
+            <!-- Commission Chart -->
+            <div class="card card-chart">
+              <div class="card-header">
+                <h3><i class="fas fa-chart-pie"></i> Commission Breakdown</h3>
+              </div>
+              <div class="card-body">
+                <canvas id="chart-commission" height="260"></canvas>
+              </div>
+            </div>
+            <!-- Leaderboard -->
+            <div class="card card-leaderboard">
+              <div class="card-header">
+                <h3><i class="fas fa-ranking-star"></i> Top Performers</h3>
+              </div>
+              <div class="card-body">
+                <ol id="leaderboard-list" class="leaderboard-list"></ol>
+              </div>
+            </div>
+            <!-- Recent Activity -->
+            <div class="card card-activity">
+              <div class="card-header">
+                <h3><i class="fas fa-clock-rotate-left"></i> Recent Activity</h3>
+              </div>
+              <div class="card-body">
+                <ul id="recent-activity" class="activity-list"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== AGENT REGISTRATION ==================== -->
+        <section id="page-register-agent" class="page">
+          <div class="card form-card">
+            <div class="card-header">
+              <h3><i class="fas fa-user-plus"></i> Register New Agent</h3>
+            </div>
+            <div class="card-body">
+              <form id="agent-registration-form" class="modern-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="agent-name">Full Name *</label>
+                    <input type="text" id="agent-name" placeholder="e.g. Rahul Sharma" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="agent-email">Email *</label>
+                    <input type="email" id="agent-email" placeholder="e.g. rahul@company.com" required />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="agent-phone">Phone *</label>
+                    <input type="tel" id="agent-phone" placeholder="e.g. 9876543210" required pattern="[0-9]{10}" />
+                  </div>
+                  <div class="form-group">
+                    <label for="agent-location">Location *</label>
+                    <input type="text" id="agent-location" placeholder="e.g. Delhi" required />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="agent-status">Status</label>
+                    <select id="agent-status">
+                      <option value="Active">Active</option>
+                      <option value="In Training">In Training</option>
+                      <option value="Inactive">Inactive</option>
+                      <option value="On Leave">On Leave</option>
+                      <option value="Top Performer">Top Performer</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="agent-performance">Performance Level</label>
+                    <select id="agent-performance">
+                      <option value="Rising Star">Rising Star</option>
+                      <option value="Bronze">Bronze</option>
+                      <option value="Silver">Silver</option>
+                      <option value="Gold">Gold</option>
+                      <option value="Platinum">Platinum</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="agent-join-date">Join Date</label>
+                    <input type="date" id="agent-join-date" />
+                  </div>
+                  <div class="form-group">
+                    <label for="agent-target">Monthly Target (₹)</label>
+                    <input type="number" id="agent-target" placeholder="e.g. 50000" min="0" />
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button type="reset" class="btn-secondary"><i class="fas fa-rotate-left"></i> Reset</button>
+                  <button type="submit" class="btn-primary"><i class="fas fa-check"></i> Register Agent</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== AGENT LISTING ==================== -->
+        <section id="page-agents" class="page">
+          <div class="page-toolbar">
+            <div class="search-bar">
+              <i class="fas fa-search"></i>
+              <input type="text" id="agent-search" placeholder="Search agents by name, email, or location..." />
+            </div>
+            <div class="filter-group">
+              <select id="filter-status">
+                <option value="">All Statuses</option>
+                <option value="Active">Active</option>
+                <option value="In Training">In Training</option>
+                <option value="Inactive">Inactive</option>
+                <option value="On Leave">On Leave</option>
+                <option value="Top Performer">Top Performer</option>
+              </select>
+              <select id="filter-performance">
+                <option value="">All Levels</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Bronze">Bronze</option>
+                <option value="Rising Star">Rising Star</option>
+              </select>
+            </div>
+          </div>
+          <div id="agents-grid" class="agents-grid"></div>
+        </section>
+
+        <!-- ==================== AGENT DETAIL MODAL ==================== -->
+        <div id="agent-detail-modal" class="modal-overlay hidden">
+          <div class="modal">
+            <button class="modal-close" id="close-agent-modal"><i class="fas fa-xmark"></i></button>
+            <div id="agent-detail-content"></div>
+          </div>
+        </div>
+
+        <!-- ==================== COMMISSIONS ==================== -->
+        <section id="page-commissions" class="page">
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fas fa-coins"></i> Commission Management</h3>
+              <button class="btn-primary btn-sm" id="add-commission-btn"><i class="fas fa-plus"></i> Add Commission</button>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="data-table" id="commission-table">
+                  <thead>
+                    <tr>
+                      <th>Agent</th>
+                      <th>Type</th>
+                      <th>Amount (₹)</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="commission-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Add Commission Modal -->
+          <div id="commission-modal" class="modal-overlay hidden">
+            <div class="modal modal-sm">
+              <button class="modal-close" id="close-commission-modal"><i class="fas fa-xmark"></i></button>
+              <h3>Add Commission</h3>
+              <form id="commission-form" class="modern-form">
+                <div class="form-group">
+                  <label for="comm-agent">Agent</label>
+                  <select id="comm-agent" required></select>
+                </div>
+                <div class="form-group">
+                  <label for="comm-type">Commission Type</label>
+                  <select id="comm-type" required>
+                    <option value="First Year">First Year Commission</option>
+                    <option value="Renewal">Renewal Commission</option>
+                    <option value="Bonus">Bonus Commission</option>
+                    <option value="Team">Team Commission</option>
+                    <option value="Performance Bonus">Performance Bonus</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="comm-amount">Amount (₹)</label>
+                  <input type="number" id="comm-amount" min="1" required placeholder="e.g. 5000" />
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn-primary"><i class="fas fa-check"></i> Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== PERFORMANCE ==================== -->
+        <section id="page-performance" class="page">
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fas fa-chart-line"></i> Performance Tracking</h3>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="data-table" id="performance-table">
+                  <thead>
+                    <tr>
+                      <th>Agent</th>
+                      <th>Level</th>
+                      <th>Target (₹)</th>
+                      <th>Achieved (₹)</th>
+                      <th>Progress</th>
+                      <th>Policies</th>
+                    </tr>
+                  </thead>
+                  <tbody id="performance-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TRAINING ==================== -->
+        <section id="page-training" class="page">
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="fas fa-graduation-cap"></i> Training Programs</h3>
+              <button class="btn-primary btn-sm" id="add-training-btn"><i class="fas fa-plus"></i> Add Program</button>
+            </div>
+            <div class="card-body">
+              <div id="training-grid" class="training-grid"></div>
+            </div>
+          </div>
+          <!-- Add Training Modal -->
+          <div id="training-modal" class="modal-overlay hidden">
+            <div class="modal modal-sm">
+              <button class="modal-close" id="close-training-modal"><i class="fas fa-xmark"></i></button>
+              <h3>Add Training Program</h3>
+              <form id="training-form" class="modern-form">
+                <div class="form-group">
+                  <label for="train-name">Program Name</label>
+                  <input type="text" id="train-name" required placeholder="e.g. Advanced Life Insurance" />
+                </div>
+                <div class="form-group">
+                  <label for="train-category">Category</label>
+                  <select id="train-category" required>
+                    <option value="Life Insurance">Life Insurance</option>
+                    <option value="Health Insurance">Health Insurance</option>
+                    <option value="Motor Insurance">Motor Insurance</option>
+                    <option value="Sales Techniques">Sales Techniques</option>
+                    <option value="Compliance">Compliance</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="train-duration">Duration (hours)</label>
+                  <input type="number" id="train-duration" min="1" required placeholder="e.g. 20" />
+                </div>
+                <div class="form-group">
+                  <label for="train-agent">Assign to Agent</label>
+                  <select id="train-agent" required></select>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn-primary"><i class="fas fa-check"></i> Save</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== INCENTIVES & REWARDS ==================== -->
+        <section id="page-incentives" class="page">
+          <div class="incentives-header">
+            <div class="card incentive-banner">
+              <div class="banner-content">
+                <h3><i class="fas fa-trophy"></i> Incentives & Rewards Program</h3>
+                <p>Recognize and reward top-performing agents to boost motivation and retention.</p>
+              </div>
+            </div>
+          </div>
+          <div class="incentives-grid">
+            <div class="card">
+              <div class="card-header"><h3><i class="fas fa-medal"></i> Active Rewards</h3></div>
+              <div class="card-body">
+                <div id="rewards-list" class="rewards-list"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><h3><i class="fas fa-crown"></i> Hall of Fame</h3></div>
+              <div class="card-body">
+                <div id="hall-of-fame" class="hall-of-fame"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== REPORTS ==================== -->
+        <section id="page-reports" class="page">
+          <div class="reports-toolbar">
+            <select id="report-type">
+              <option value="agent">Agent Report</option>
+              <option value="commission">Commission Report</option>
+              <option value="performance">Performance Report</option>
+            </select>
+            <div class="report-actions">
+              <button class="btn-primary btn-sm" id="export-csv-btn"><i class="fas fa-file-csv"></i> Export CSV</button>
+              <button class="btn-secondary btn-sm" id="export-pdf-btn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3 id="report-title"><i class="fas fa-file-chart-column"></i> Agent Report</h3></div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="data-table" id="report-table">
+                  <thead id="report-thead"></thead>
+                  <tbody id="report-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
